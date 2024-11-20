@@ -29,8 +29,6 @@ public class Ex2_Actor {
     }
 
     public String getName() {
-        System.out.println("testing for Git");
-        System.out.println("testing for Git");
 
         return name;
     }

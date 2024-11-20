@@ -25,7 +25,7 @@ public class Ex3_Client {
         double baseFee = 30;
 
         if(lawnSize > 200){
-            baseFee += 0.1512 * lawnSize;
+            baseFee += 0.2 * lawnSize;
         }
 
         if(hasDog){
@@ -39,7 +39,30 @@ public class Ex3_Client {
         System.out.println();
     }
 
-//    public void printMe(){
+    public void setHasDog(boolean hasDog) {
+        this.hasDog = hasDog;
+    }
+
+    public void processPayment(double dollars){
+        outstandingFees -= dollars;
+        System.out.println(name + " you currently owe $" + outstandingFees);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void delinquent(){
+        double interest = (5 + outstandingFees) * 0.1;
+        System.out.println(name + " your payment is overdue, you have been charged interest of " + interest);
+        outstandingFees += interest;
+
+        if(outstandingFees > 500 && hasDog){
+            hasDog = false;
+        }
+    }
+
+    //    public void printMe(){
 //        System.out.println();
 //    }
 
