@@ -40,4 +40,18 @@ public class As1_Crop {
     public void setAcres(int acres) {
         this.acres = acres;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void printMe(){
+        System.out.println("Crop name: " + name +", How many " + units + ": " + yield + ", dollars per " + units + ": " + price + ", acres allocated to crop: " + acres);
+    }
+
+    public double harvest(int given){
+        double temp = (price * yield * units * acres);
+        return temp;
+    }
+
 }
