@@ -61,6 +61,22 @@ public class Ex3_Client {
         return name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public int getLawnSize() {
+        return lawnSize;
+    }
+
+    public boolean getHasDog() {
+        return hasDog;
+    }
+
+    public double getOutstandingFees() {
+        return outstandingFees;
+    }
+
     public void delinquent(){
         double interest = (5 + outstandingFees) * 0.1;
         System.out.println(name + " your payment is overdue, you have been charged interest of " + interest);
