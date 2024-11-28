@@ -59,4 +59,8 @@ public class As1_Crop {
         return temp;
     }
 
+    public void plantSeeds(int num){
+        acres += num;
+    }
+
 }

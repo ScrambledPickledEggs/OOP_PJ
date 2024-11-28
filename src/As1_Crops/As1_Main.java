@@ -47,6 +47,7 @@ public class As1_Main {
 
         System.out.println("Welcome to Hazardous Harvesting");
         while (true) {
+            remainingAcres = 0;
             for (int i = 0; i < allFlora.size(); i++) {
                 remainingAcres += allFlora.get(i).getAcres();
             }
@@ -96,18 +97,38 @@ public class As1_Main {
             } else if (choice == 4) {
                 System.out.println("What crop do you want do plant?");
                 String answer = Library.input.nextLine();
-                System.out.println("How many acres will be allocated to this crop? You have " + (1000 - remainingAcres) + " acres left.");
-                int answer5 = Library.input.nextInt();
-                System.out.println("What's it measured in?");
-                Library.input.nextLine();
-                String answer2 = Library.input.nextLine();
-                System.out.println("How many units per acre?");
-                int answer3 = Library.input.nextInt();
-                System.out.println("And finally. How much money per unit");
-                double answer4 = Library.input.nextDouble();
-                allFlora.add(allFlora.size(), new As1_Crop(answer, answer3, answer2, answer4));
-                allFlora.get(allFlora.size()-1).setAcres(answer5);
+                int index = searchByName(allFlora, answer);
+                if(index != -1){
+                    System.out.println("I see you already have some " + answer + ". You have " + (1000 - remainingAcres) + " acres left to plant more.\nHow much will you plant?");
+                    int impossibleAnswer = Library.input.nextInt();
+                    if((impossibleAnswer > (1000 - remainingAcres))||impossibleAnswer <= 0){
+                        System.out.println("Sorry, you don't have enough acres to support that crop or that's an impossible crop size");
+                    } else {
+                        allFlora.get(index).plantSeeds(impossibleAnswer);
+                    }
 
+                } else {
+
+                    System.out.println("How many acres will be allocated to this crop? You have " + (1000 - remainingAcres) + " acres left.");
+                    int answer5 = Library.input.nextInt();
+                    if ((answer5 > (1000 - remainingAcres)) || answer5 <= 0) {
+                        System.out.println("Sorry, you don't have enough acres to support that crop or that's an impossible crop size");
+                    } else {
+
+                        System.out.println("What's it measured in?");
+                        Library.input.nextLine();
+                        String answer2 = Library.input.nextLine();
+
+                        System.out.println("How many units per acre?");
+                        int answer3 = Library.input.nextInt();
+
+                        System.out.println("And finally. How much money per unit");
+                        double answer4 = Library.input.nextDouble();
+
+                        allFlora.add(allFlora.size(), new As1_Crop(answer, answer3, answer2, answer4));
+                        allFlora.get(allFlora.size() - 1).setAcres(answer5);
+                    }
+                }
 
             } else if (choice == 5) {
                 break;
