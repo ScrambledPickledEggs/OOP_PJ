@@ -59,16 +59,17 @@ public class As1_Main {
             System.out.println("4.  Plant a crop");
             System.out.println("5.  Exit");
 
-            int choice = Library.input.nextInt();
-            Library.input.nextLine();
-            if (choice == 1) {
+
+
+            String choice = Library.input.nextLine();
+            if (choice.equals("1")) {
 
                 for (int i = 0; i < allFlora.size(); i++) {
                     allFlora.get(i).printMe();
 
                 }
 
-            } else if (choice == 2) {
+            } else if (choice.equals("2")) {
                 System.out.println("Whatya looking fer?");
                 String answer = Library.input.nextLine();
 
@@ -82,7 +83,7 @@ public class As1_Main {
                 }
 
 
-            } else if (choice == 3) {
+            } else if (choice.equals("3")) {
                 System.out.println("The total revenue so far is: " + totalRevenue + "$");
 //                System.out.println("Who is paying?");
 //                String name = Library.input.nextLine();
@@ -94,7 +95,7 @@ public class As1_Main {
 //                allFlora.get(foundClient).processPayment(amount);
 
 
-            } else if (choice == 4) {
+            } else if (choice.equals("4")) {
                 System.out.println("What crop do you want do plant?");
                 String answer = Library.input.nextLine();
                 int index = searchByName(allFlora, answer);
@@ -124,13 +125,14 @@ public class As1_Main {
 
                         System.out.println("And finally. How much money per unit");
                         double answer4 = Library.input.nextDouble();
+                        Library.input.nextLine();
 
                         allFlora.add(allFlora.size(), new As1_Crop(answer, answer3, answer2, answer4));
                         allFlora.get(allFlora.size() - 1).setAcres(answer5);
                     }
                 }
 
-            } else if (choice == 5) {
+            } else if (choice.equals("5")) {
                 break;
             } else {
 
