@@ -73,9 +73,108 @@ public class As3_Main {
                 }
 
 
-            }//---------------------------------------------------------------------------------------------------------sort by proficiency
+            }//---------------------------------------------------------------------------------------------------------filter by proficiency
+            else if(choice.equals("4")){
+
+                System.out.println("Sorting by casualties");
+
+                ArrayList <As3_Team> tempArray = new ArrayList<>();
+
+                loadFile("data/SnowfallSurf.csv", tempArray);
+
+                for(int i=0; i<tempArray.size()-1; i++){
+                    int lowestIndex = i;
+                    for(int j=i+1; j<tempArray.size(); j++){
+                        if(tempArray.get(j).getPlayersLost() < tempArray.get(lowestIndex).getPlayersLost()){
+                            lowestIndex = j;
+                        }
+                    }
+
+                    String temp = tempArray.get(i).getName();
+                    tempArray.get(i).setName(tempArray.get(lowestIndex).getName());
+                    tempArray.get(lowestIndex).setName(temp);
+
+                    String temp2 = tempArray.get(i).getCity();
+                    tempArray.get(i).setCity(tempArray.get(lowestIndex).getCity());
+                    tempArray.get(lowestIndex).setCity(temp2);
+
+                    String temp3 = tempArray.get(i).getProficiency();
+                    tempArray.get(i).setProficiency(tempArray.get(lowestIndex).getProficiency());
+                    tempArray.get(lowestIndex).setProficiency(temp3);
+
+                    int temp4 = tempArray.get(i).getGamesWon();
+                    tempArray.get(i).setGamesWon(tempArray.get(lowestIndex).getGamesWon());
+                    tempArray.get(lowestIndex).setGamesWon(temp4);
+
+                    int temp5 = tempArray.get(i).getPlayersLost();
+                    tempArray.get(i).setPlayersLost(tempArray.get(lowestIndex).getPlayersLost());
+                    tempArray.get(lowestIndex).setPlayersLost(temp5);
+
+                    int temp6 = tempArray.get(i).getMountainsVisited();
+                    tempArray.get(i).setMountainsVisited(tempArray.get(lowestIndex).getMountainsVisited());
+                    tempArray.get(lowestIndex).setMountainsVisited(temp6);
+
+                }
+
+                for (int i = 0; i < tempArray.size(); i++) {
+                    tempArray.get(i).printMe();
+                }
+
+
+
+
+            }//---------------------------------------------------------------------------------------------------------sort by casualties
+            else if(choice.equals("5")){
+                System.out.println("Enter the info for the most recent avalanche");
+                System.out.println("Which team played?");
+                String answer = Library.input.nextLine();
+
+                int irrel = -1;
+                for (int i = 0; i < allTeams.size(); i++) {
+                    if(answer.equalsIgnoreCase(allTeams.get(i).getName())){
+                        irrel = i;
+                    }
+                }
+                if(irrel==-1){
+                    System.out.println("error");
+                }else {
+
+                    allTeams.get(irrel).setMountainsVisited(allTeams.get(irrel).getMountainsVisited() + 1);
+                    System.out.println("Ah so the " + allTeams.get(irrel).getName() + " played again? Then they've gone to " + allTeams.get(irrel).getMountainsVisited() + " mountains now.");
+                    if (allTeams.get(irrel).getMountainsVisited() > 10) {
+                        allTeams.get(irrel).setProficiency("Grey Diamond");
+                        if (allTeams.get(irrel).getMountainsVisited() > 20) {
+                            allTeams.get(irrel).setProficiency("Black Diamond");
+                            if (allTeams.get(irrel).getMountainsVisited() > 30) {
+                                allTeams.get(irrel).setProficiency("Double Black Diamond");
+                            }
+                        }
+                    }
+                    System.out.println("Their proficiency level is now " + allTeams.get(irrel).getProficiency());
+
+                    System.out.println("Did they win?");
+                    String answer2 = Library.input.nextLine();
+                    if (answer2.equalsIgnoreCase("yes")) {
+                        allTeams.get(irrel).setGamesWon(allTeams.get(irrel).getGamesWon() + 1);
+                        System.out.println("Oh joy");
+                    } else {
+                        System.out.println("Aw sad");
+                    }
+
+                    System.out.println("Now be honest, how many people did they lose?");
+                    int answer3 = Library.input.nextInt();
+                    Library.input.nextLine();
+                    allTeams.get(irrel).setPlayersLost(allTeams.get(irrel).getPlayersLost() + answer3);
+
+                    System.out.println("The teams stats now look like this:");
+                    allTeams.get(irrel).printMe();
+
+                }
+                saveFile("data/SnowfallSurf.csv", allTeams);
+            }
+
             else if(choice.equals("6")){
-                saveFile("data/ClientDataAfter.csv", allTeams);
+                saveFile("data/SnowfallSurf.csv", allTeams);
 
                 break;
             }

@@ -49,4 +49,27 @@ public class As3_Team {
         return mountainsVisited;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setProficiency(String proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    public void setGamesWon(int gamesWon) {
+        this.gamesWon = gamesWon;
+    }
+
+    public void setPlayersLost(int playersLost) {
+        this.playersLost = playersLost;
+    }
+
+    public void setMountainsVisited(int mountainsVisited) {
+        this.mountainsVisited = mountainsVisited;
+    }
 }
