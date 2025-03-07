@@ -1,3 +1,6 @@
+//Teams assignment 100%
+//Players assignment 40% - class created but nothing further
+
 package As3_League;
 
 import Examples.Ex3_Client;
